@@ -8,10 +8,7 @@ nonduck_arr = []
 def readimg(paths,arr):
     for path in paths:
         img = cv2.imread(path)
-        h,w,ch = img.shape
-        for i in range(h):
-            for j in range(w):
-                arr.append(img[i,j])
+        arr.append(img[0,0])
 
 #compute mean and variance
 def cal_u_var(data_arr):
