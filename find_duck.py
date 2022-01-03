@@ -4,7 +4,7 @@ import math
 duck_arr = []
 nonduck_arr = []
 
-#add data to array
+#add datas to array
 def readimg(paths,arr):
     for path in paths:
         img = cv2.imread(path)
@@ -23,7 +23,7 @@ def cal_u_var(data_arr):
         sum_b += float(data_arr[x][0])
         sum_g += float(data_arr[x][1])
         sum_r += float(data_arr[x][2])
-        # print(x[0],x[1],x[2])
+
     # compute mean
     ub = sum_b / len(data_arr)
     ug = sum_g / len(data_arr)
@@ -37,7 +37,7 @@ def cal_u_var(data_arr):
         kb += (float(data_arr[x][0]) - ub) ** 2
         kg += (float(data_arr[x][1]) - ug) ** 2
         kr += (float(data_arr[x][2]) - ur) ** 2
-    print(len(data_arr))
+
     vb = kb / (len(data_arr)-1)
     vg = kg / (len(data_arr)-1)
     vr = kr / (len(data_arr)-1)
@@ -73,14 +73,12 @@ readimg(paths_nd, nonduck_arr)
 #data's mean and variance
 duck_ub, duck_ug, duck_ur, duck_vb, duck_vg, duck_vr = cal_u_var(duck_arr)
 duck_nub, duck_nug, duck_nur, duck_nvb, duck_nvg, duck_nvr = cal_u_var(nonduck_arr)
-print(duck_ub, duck_ug, duck_ur, duck_vb, duck_vg, duck_vr)
-print(duck_nub, duck_nug, duck_nur, duck_nvb, duck_nvg, duck_nvr)
 
 #Priori Probability
 p1=0.5
 p2=0.5
 
-test_path = 'C:/Users/user/PycharmProjects/DUCK/duck_rec/test/test1.jpg'
+test_path = 'C:/Users/user/PycharmProjects/DUCK/duck_rec/test/full_duck.jpg'
 test_img = cv2.imread(test_path)
 height, width, channels = test_img.shape
 #compute the propability of duck/nonduck of each pixel
