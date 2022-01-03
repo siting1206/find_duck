@@ -8,7 +8,10 @@ nonduck_arr = []
 def readimg(paths,arr):
     for path in paths:
         img = cv2.imread(path)
-        arr.append(img[0, 0])
+        h,w,ch = img.shape
+        for i in range(h):
+            for j in range(w):
+                arr.append(img[i,j])
 
 #compute mean and variance
 def cal_u_var(data_arr):
@@ -34,9 +37,10 @@ def cal_u_var(data_arr):
         kb += (float(data_arr[x][0]) - ub) ** 2
         kg += (float(data_arr[x][1]) - ug) ** 2
         kr += (float(data_arr[x][2]) - ur) ** 2
-    vb = kb / 49
-    vg = kg / 49
-    vr = kr / 49
+    print(len(data_arr))
+    vb = kb / (len(data_arr)-1)
+    vg = kg / (len(data_arr)-1)
+    vr = kr / (len(data_arr)-1)
     return ub, ug, ur, vb, vg, vr
 
 #compute N(x|μ,σ)
@@ -76,7 +80,7 @@ print(duck_nub, duck_nug, duck_nur, duck_nvb, duck_nvg, duck_nvr)
 p1=0.5
 p2=0.5
 
-test_path = 'C:/Users/user/PycharmProjects/DUCK/duck_rec/test/full_duck.jpg'
+test_path = 'C:/Users/user/PycharmProjects/DUCK/duck_rec/test/test1.jpg'
 test_img = cv2.imread(test_path)
 height, width, channels = test_img.shape
 #compute the propability of duck/nonduck of each pixel
